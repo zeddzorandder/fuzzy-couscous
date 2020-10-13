@@ -1,3 +1,3 @@
 # fuzzy-couscous
 
-Just messing around with canvas
+Just messing around with canvass
