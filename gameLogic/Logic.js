@@ -3,41 +3,39 @@ import { Rectangle } from '../entities/Rectangle.js';
 import { TextRender } from '../entities/TextRender.js';
 
 export class Logic{
-    renderer = 0;
+    
+    
     constructor(renderer){
         this.renderer = renderer;
-        this.vbasd = [1,2,3];
+        this.entities = [];
+        this.tick = 0;
+        this.second = 1000/(1000/cfg.INTERVAL); //bad!
 
-        this.renderer.addGraphicsEntity(new Rectangle(0,0,"blue",75,45));
-        this.renderer.addGraphicsEntity(new TextRender(14,30,"yo yo", "purple", "Verdana", 70));
+        this.addEntity(new Rectangle(50,50,"black", 90,75));
+        this.addEntity(new TextRender(30,30,"fsda", "blue"));
 
-        this.renderer.entities[1].setFontSize(44);
-
-        this.renderer.entities[1].addBehavior((e) => {
-            e.x += 1;
+        this.entities[0].addBehavior((e) => {
+            if(this.tick % 62 == 0){
+                console.log("asd");
+            }
         });
 
-        this.renderer.entities[0].addBehavior((e)=>{
-            if(e.x >= 200){
-                e.velx = -1;
-                e.color = "blue";
+        setInterval(() => { // i don't like it. But it has to be this way.
+            renderer.render();
+            this.tick+=1;
+            if(this.tick >= 1000){
+                this.tick = 0;
             }
-            if(e.x <= 100){
-                e.velx = 1.3;
-                e.color = "red";
-            }
-            e.x += e.velx;
-        });
-        
+            update(this.entities);
+        }, 1000/cfg.INTERVAL);
 
-        setInterval(game, 1000/cfg.INTERVAL);
     }
-}
 
-function game(){
-    renderer.render();
-    update(renderer.entities);
-}
+    addEntity = (entity) =>{
+        this.entities.push(entity);
+    }
+} 
+
 function update(entities){
     for(let i = 0; i < entities.length; i++){
             entities[i].doBehavior();

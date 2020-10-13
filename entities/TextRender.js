@@ -13,7 +13,7 @@ export class TextRender extends Entity{
     render = (ctx) => {
         (this.font != undefined ? ctx.font = this.font : "");
         (this.color != undefined ? ctx.fillStyle = this.color : "");
-        ctx.fillText(this.text, this.x, this.y);
+        ctx.fillText(this.text, this.x, this.y+20);
     }
 
     setFont = (size, style) => {
