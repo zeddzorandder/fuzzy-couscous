@@ -1,8 +1,8 @@
 import {Entity} from "./Entity.js";
 
 export class Circle extends Entity{
-    constructor(x,y,color, size){
-        super(x,y,color);
+    constructor(id,x,y,color, size){
+        super(id,x,y,color);
         this.size = size;
         this.color = color;
     }

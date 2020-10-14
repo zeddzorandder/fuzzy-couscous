@@ -3,7 +3,7 @@ import { Entity } from "./Entity.js";
 
 export class TextRender extends Entity{
     font = "";
-    constructor(x,y,text,...args){
+    constructor(id,x,y,text,...args){
         super(x,y);
         this.text = text;
         (args.length > 0 ? this.color = args[0] : "");

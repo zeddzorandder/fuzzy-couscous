@@ -1,12 +1,19 @@
 export class Entity{
-    constructor(x, y, color){
+    constructor(id,x, y, color, ...args){
+        if(id == null){
+            this.id = Math.floor(Math.random()*100000000);
+        } else {
+            this.id = id;
+        }
         this.x = x;
         this.y = y;
+        (args.length >= 0 ? this.parent = args[0] : this.parent = null);
         this.color = color;
         this.behaviors = [];
-        this.renderComponents = [];
+        this.children = [];
         this.velx = 0;
         this.vely = 0;
+        this.properties = {};
     }
     addBehavior = (behavior) => this.behaviors.push(behavior)
     doBehavior = (entity) => {
@@ -14,4 +21,5 @@ export class Entity{
             (this.behaviors[i] instanceof Function ? this.behaviors[i](this) : "");
         }
     }
+   
 }

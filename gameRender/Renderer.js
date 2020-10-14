@@ -4,7 +4,6 @@ export class Renderer{
     entities = [];
     render = () => {
         refreshScreen();
-        ctx.fillText("Still works fine, boss.", c.width/2, c.height/2);
         for(let i = 0; i < this.entities.length; i++){
             this.entities[i].render(ctx);
         }
