@@ -14,5 +14,5 @@ export var loadChessboard = (entityContainer) => {
         }
         y += boardSize;
     }
-    return chessFields;
+    return chessFields
 }
