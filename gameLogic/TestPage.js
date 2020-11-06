@@ -26,10 +26,4 @@ export class TestPage extends Page {
             }
         });
     }
-
-    processPage = () => {
-        if(this.logicContext.tick == 180){
-            this.logicContext.findEntity("djole").x = 930;
-        }
-    }
 }
