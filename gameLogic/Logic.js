@@ -14,13 +14,12 @@ export class Logic{
         this.activePage = -1;
 
         this.pages = [];
-        this.savedPages = [];
-        this.activePage = this.pages.push(new ChessPage(this, this.pages.length))-1;
-        this.pages.push(new TestPage(this, this.pages.length));
+
+        this.activePage = this.pages.push(new ChessPage(this, this.pages.length))-1; // first page
+        this.pages.push(new TestPage(this, this.pages.length)); //all otherpages
         
         this.switchPage(1);
-
-        // var fields = chessboard.loadChessboard(this);
+        console.log(this.savedPages);
 
         setInterval(() => { // i don't like it. But it has to be this way.
             renderer.render();
@@ -28,19 +27,15 @@ export class Logic{
             if(this.tick >= 1000){
                 this.tick = 0;
             }
+
             this.pages[this.activePage].processPage();
             update(this.entities);
         }, 1000/cfg.INTERVAL);
-
     }
 
     switchPage = (pageId) => {
         this.activePage = pageId;
-        if(this.savedPages[pageId] != undefined){
-            this.entities = this.savedPages[pageId].state;
-        } else {
-            this.pages[pageId].loadPage();
-        }
+        this.pages[pageId].loadPage();
     }
 
     addEntity = (entity) => {

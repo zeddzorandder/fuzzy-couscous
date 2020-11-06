@@ -16,7 +16,7 @@ export class TestPage {
         this.logicContext.addEntity(new Rectangle("djole", 800, 100, "red", 50,50));
 
         this.logicContext.findEntity("djole").addBehavior((e)=>{
-            e.x += 1;
+            e.x += 2;
             
             if(e.x == 850){
                 e.color = "green";
@@ -33,16 +33,17 @@ export class TestPage {
     }
 
     processPage = () => {
-
+        if(this.logicContext.tick == 180){
+            this.logicContext.findEntity("djole").x = 930;
+        }
     }
 
     destroyPage = () => {
         this.logicContext.entities = [];
     }
 
-    changePage = (id) => {
-        this.logicContext.savedPages[this.id] = {"state": this.entities};
+    changePage = (pageId) => {
         this.destroyPage();
-        this.logicContext.switchPage(id);
+        this.logicContext.switchPage(pageId);
     }
 }
