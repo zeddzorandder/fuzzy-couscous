@@ -1,14 +1,9 @@
 import { Rectangle } from "../entities/Rectangle.js";
-/*
-    Pages are the "levels" you make. Currently, they are still under construction.
-    To make a level, you create a Page. You can name it whatever, it doesn't use any kind of inheritance.
-    Create the pages in the main Logic class and
-**/
-export class TestPage {
+import { Page } from "./Page.js";
+
+export class TestPage extends Page {
     constructor(logicContext, id){
-        this.logicContext = logicContext;
-        this.id = id;
-        this.entities = logicContext.entities;
+        super(logicContext, id)
     }
 
     // This is the main loop for the "page"
@@ -36,14 +31,5 @@ export class TestPage {
         if(this.logicContext.tick == 180){
             this.logicContext.findEntity("djole").x = 930;
         }
-    }
-
-    destroyPage = () => {
-        this.logicContext.entities = [];
-    }
-
-    changePage = (pageId) => {
-        this.destroyPage();
-        this.logicContext.switchPage(pageId);
     }
 }
