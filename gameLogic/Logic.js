@@ -1,6 +1,4 @@
 import * as cfg from './LogicConfig.js';
-import { Rectangle } from '../entities/Rectangle.js';
-import * as chessboard from '../entities/figures/chessboard.js';
 import { ChessPage } from './ChessPage.js';
 import { TestPage } from './TestPage.js';
 
@@ -11,15 +9,14 @@ export class Logic{
         this.entities = [];
         this.tick = 0;
         this.second = Math.ceil(1000/(1000/cfg.INTERVAL)); //sort of ok, i guess.
-        this.activePage = -1;
+        this.activePage = "";
 
-        this.pages = [];
+        this.pages = {};
 
-        this.activePage = this.pages.push(new ChessPage(this, this.pages.length))-1; // first page
-        this.pages.push(new TestPage(this, this.pages.length)); //all otherpages
+        this.initPage("chesspage", new ChessPage(this));
+        this.initPage("testpage", new TestPage(this));
         
-        this.switchPage(1);
-        console.log(this.savedPages);
+        this.switchPage("testpage");
 
         setInterval(() => { // i don't like it. But it has to be this way.
             renderer.render();
@@ -27,16 +24,22 @@ export class Logic{
             if(this.tick >= 1000){
                 this.tick = 0;
             }
+            this.pages[this.activePage].obj.processPage();
 
-            this.pages[this.activePage].processPage();
             update(this.entities);
         }, 1000/cfg.INTERVAL);
     }
 
-    switchPage = (pageId) => {
-        this.activePage = pageId;
-        this.pages[pageId].loadPage();
+    // CURRENT FOCUS
+    switchPage = (pageName) => {
+        this.activePage = pageName;
+        this.pages[pageName].obj.loadPage();
     }
+
+    initPage = (pageName, pageObject) => {
+        this.pages[pageName] = {obj:pageObject, state:[]};
+    }
+    // CURRENT FOCUS
 
     addEntity = (entity) => {
         this.entities.push(entity);

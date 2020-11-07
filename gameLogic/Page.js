@@ -5,7 +5,7 @@ export class Page {
         this.entities = logicContext.entities;
     }
 
-    loadPage = () => {
+    loadPage = (state) => {
         
     }
 

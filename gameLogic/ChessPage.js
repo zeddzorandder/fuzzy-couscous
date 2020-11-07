@@ -10,12 +10,12 @@ export class ChessPage extends Page {
         super(logicContext, id);
     }
 
-    loadPage = () => {
+    loadPage = (state) => {
        var fields = chess.loadChessboard(this.logicContext);
         fields[63].addBehavior((e)=>{
             e.x+=1;
             if(e.x == 670){
-                this.changePage(1);
+                this.changePage("testpage");
             }
         });
     }

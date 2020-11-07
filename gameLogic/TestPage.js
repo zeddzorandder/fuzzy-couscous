@@ -7,7 +7,7 @@ export class TestPage extends Page {
     }
 
     // This is the main loop for the "page"
-    loadPage = () => {
+    loadPage = (state) => {
         this.logicContext.addEntity(new Rectangle("djole", 800, 100, "red", 50,50));
 
         this.logicContext.findEntity("djole").addBehavior((e)=>{
@@ -19,11 +19,12 @@ export class TestPage extends Page {
             }
 
             if(e.x == 950){
-                this.changePage(0);
+                this.changePage("chesspage");
             }
             if(e.x == 1200){
                 
             }
         });
     }
+
 }
