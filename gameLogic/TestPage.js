@@ -16,6 +16,27 @@ export class TestPage extends Page {
         this.logicContext.addEntity(new Rectangle("healplace", 400, 200, "green", 100,100));
         
         this.player = this.logicContext.addEntity(new Rectangle("player", 1050, 250, "white", 25, 25));
+        this.healthDamage = this.logicContext.addEntity(new Rectangle("healthDamage", 595, 130, "white", 300, 25));
+        this.healthBar = this.logicContext.addEntity(new Rectangle("healthbar", 595, 130, "yellow", 25, 25));
+        this.healthBar.properties.maxwidth = 300;
+
+        this.healthDamage.addBehavior((e)=>{
+            if(this.healthBar.width < e.width){
+                e.width--;
+            }
+        });
+
+        this.healthBar.addBehavior((e)=>{
+            if(e.width >= e.properties.maxwidth * 0.75){
+                e.color = "green";
+            }
+            if(e.width >= e.properties.maxwidth * 0.5 && e.width < e.properties.maxwidth * 0.75){
+                e.color = "yellow"
+            }
+            if(e. width <= e.properties.maxwidth * 0.25){
+                e.color = "red";
+            }
+        });
 
         this.player.properties.directions = [false, false, false, false];
         this.player.properties.speed = 5;
@@ -42,6 +63,9 @@ export class TestPage extends Page {
 
     processPage = () => {
         this.handlePlayer();
+
+        this.healthBar.width = this.player.properties.health*3;
+
         this.ui_playerXPos.text = "X: "+this.player.x;
         this.ui_playerYPos.text = "Y: "+this.player.y;
         this.ui_playerHealth.text = "hp: "+this.player.properties.health;
@@ -63,11 +87,11 @@ export class TestPage extends Page {
             // this.changePage("chesspage");
             if(this.player.properties.health > 0){
                 if(this.logicContext.tick % 60 == 0){
-                    this.dmg = Math.floor(Math.random()*12)+1
+                    this.dmg = Math.floor(Math.random()*20)+10
                     this.player.properties.health -= this.dmg;
                     this.barpos += 65;
-                    this.logicContext.addEntity(new Rectangle(null, this.barpos, 610, "red", 50, -this.dmg*30));
-                    this.logicContext.addEntity(new TextRender(null, this.barpos+15, 610 - this.dmg*30 - 25, this.dmg));
+                    this.logicContext.addEntity(new Rectangle(null, this.barpos, 610, "red", 50, -this.dmg*10));
+                    this.logicContext.addEntity(new TextRender(null, this.barpos+15, 610 - this.dmg*10  - 25, this.dmg));
                 }
             }
         }
@@ -76,6 +100,7 @@ export class TestPage extends Page {
             // this.changePage("chesspage");
             if(this.player.properties.health <= 99){
                 this.player.properties.health++;
+                this.healthDamage.width = this.player.properties.health*3;
             }
         }
     }

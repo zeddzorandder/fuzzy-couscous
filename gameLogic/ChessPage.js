@@ -20,7 +20,7 @@ export class ChessPage extends Page {
             }
         });
 
-        this.logicContext.addEntity(new TextRender("asdasd",750,600,"GAME OVER, LOSER"));
+        this.logicContext.addEntity(new TextRender("asdasd",750,600,"GAME OVER"));
     }
 
 }
