@@ -13,21 +13,16 @@ export class ListenerHandler {
             document.addEventListener("keypress",(e)=>this.handlePlayerKeyPress(e));
             document.addEventListener("keyup",(e)=>this.handlePlayerKeyUp(e));
             this.listenersLoaded = true;
-            console.log("listeners loaded");
-        } else {
-            console.log("no listeners added");
         }
         
     }
 
+    // This should be made to work dynamically , regardless of mode or handler used.
     removeListeners = () => {
         if(this.listenersLoaded){
             document.removeEventListener("keypress",(e)=>this.handlePlayerKeyPress(e));
             document.removeEventListener("keyup",(e)=>this.handlePlayerKeyUp(e));
             this.listenersLoaded = false;
-            console.log("listeners removed");
-        } else {
-            console.log("no listeners to remove");
         }
     }
 

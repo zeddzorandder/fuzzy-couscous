@@ -8,4 +8,5 @@ Just messing around with canvass.
     2. Add the ability to make complex entities. Each entity can have multiple child entities that are tied to 
     3. Begin work on collision
     4. add render weight
+    5. add functionality to remove behaviors
     

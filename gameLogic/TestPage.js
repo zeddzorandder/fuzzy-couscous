@@ -1,5 +1,7 @@
 import { Rectangle } from "../entities/Rectangle.js";
+import { TextRender } from "../entities/TextRender.js";
 import { Page } from "./Page.js";
+import * as iHandler from "./InputHandler.js";
 
 export class TestPage extends Page {
     constructor(logicContext, id) {
@@ -9,40 +11,46 @@ export class TestPage extends Page {
     // This is the main loop for the "page"
     loadPage = (state) => {
 
+
         this.logicContext.addEntity(new Rectangle("portal", 1000,200,"blue",100,100));
+        this.logicContext.addEntity(new Rectangle("healplace", 400, 200, "green", 100,100));
+        
+        this.player = this.logicContext.addEntity(new Rectangle("player", 1050, 250, "white", 25, 25));
 
-        this.player = this.logicContext.addEntity(new Rectangle("player", 800, 100, "red", 50, 50));
         this.player.properties.directions = [false, false, false, false];
-        this.player.properties.speed = 10;
+        this.player.properties.speed = 5;
+        this.player.properties.health = 100;
 
+        this.player.addBehavior((e)=>{
+            if(e.properties.health <= 0){
+                this.changePage("chesspage");
+                e.properties.health = 0;
+            } else {
+                e.color = "white";
+            }
+        });
+
+        this.ui_playerXPos = this.logicContext.addEntity(new TextRender("sgfas", 500,75, ""));
+        this.ui_playerYPos = this.logicContext.addEntity(new TextRender("wertwer", 700,75, ""));
+        this.ui_playerHealth = this.logicContext.addEntity(new TextRender("wertwer", 850,75, ""));
+        this.ui_tick = this.logicContext.addEntity(new TextRender("sdvgsd", 1100,75, ""));
+
+        this.abspos = 0;
+        this.dmg = 0;
+        this.barpos = 0;
     }
 
     processPage = () => {
         this.handlePlayer();
-
+        this.ui_playerXPos.text = "X: "+this.player.x;
+        this.ui_playerYPos.text = "Y: "+this.player.y;
+        this.ui_playerHealth.text = "hp: "+this.player.properties.health;
+        this.ui_tick.text = Math.floor(this.logicContext.tick/60);
     }
 
-    handlePlayer = () => {
-        //make this load for the player every time
-        if (this.player.properties.directions[0]) {
-            this.player.vely = -this.player.properties.speed;
-        } else {
-            this.player.vely = 0;
-        }
-        if (this.player.properties.directions[1]) {
-            this.player.velx = -this.player.properties.speed;
-        } else {
-            this.player.velx = 0;
-        }
-        if (this.player.properties.directions[2]) {
-            this.player.vely = this.player.properties.speed;
-        }
-        if (this.player.properties.directions[3]) {
-            this.player.velx = this.player.properties.speed;
-        }
 
-        this.player.x += this.player.velx;
-        this.player.y += this.player.vely;
+    handlePlayer = () => {
+        iHandler.playerMovement(this.player);
 
         if (this.player.x < -20) {
             this.player.x = 1450;
@@ -52,7 +60,23 @@ export class TestPage extends Page {
         }
 
         if(this.player.x >= 1000 && this.player.x <= 1100 && this.player.y >= 200 && this.player.y <= 300){
-            this.changePage("chesspage");
+            // this.changePage("chesspage");
+            if(this.player.properties.health > 0){
+                if(this.logicContext.tick % 60 == 0){
+                    this.dmg = Math.floor(Math.random()*12)+1
+                    this.player.properties.health -= this.dmg;
+                    this.barpos += 65;
+                    this.logicContext.addEntity(new Rectangle(null, this.barpos, 610, "red", 50, -this.dmg*30));
+                    this.logicContext.addEntity(new TextRender(null, this.barpos+15, 610 - this.dmg*30 - 25, this.dmg));
+                }
+            }
+        }
+
+        if(this.player.x >= 400 && this.player.x <= 500 && this.player.y >= 200 && this.player.y <= 300){
+            // this.changePage("chesspage");
+            if(this.player.properties.health <= 99){
+                this.player.properties.health++;
+            }
         }
     }
 

@@ -27,7 +27,7 @@ export class Logic{
         setInterval(() => { // i don't like it. But it has to be this way.
             renderer.render();
             this.tick+=1;
-            if(this.tick >= 1000){
+            if(this.tick >= 1920){
                 this.tick = 0;
             }
             this.pages[this.activePage].obj.processPage();

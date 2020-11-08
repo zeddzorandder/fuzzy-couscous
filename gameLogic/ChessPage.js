@@ -1,4 +1,5 @@
 import * as chess from '../entities/figures/chessboard.js';
+import { TextRender } from '../entities/TextRender.js';
 import { Page } from "./Page.js";
 /*
     Pages are the "levels" you make. Currently, they are still under construction.
@@ -18,6 +19,8 @@ export class ChessPage extends Page {
                 this.changePage("testpage", "playable");
             }
         });
+
+        this.logicContext.addEntity(new TextRender("asdasd",750,600,"GAME OVER, LOSER"));
     }
 
 }
