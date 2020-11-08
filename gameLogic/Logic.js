@@ -21,9 +21,8 @@ export class Logic{
         this.initPage("chesspage", new ChessPage(this));
         this.initPage("testpage", new TestPage(this));
         
-        this.switchPage("testpage");
+        this.switchPage("testpage", "playable");
 
-        this.listeners.loadListeners(this);
 
         setInterval(() => { // i don't like it. But it has to be this way.
             renderer.render();
@@ -37,9 +36,12 @@ export class Logic{
         }, 1000/cfg.INTERVAL);
     }
 
-    switchPage = (pageName) => {
+    switchPage = (pageName, mode) => {
+        this.listeners.removeListeners();
         this.activePage = pageName;
         this.pages[pageName].obj.loadPage();
+        this.listeners.loadListeners(mode);
+
     }
 
     initPage = (pageName, pageObject) => {

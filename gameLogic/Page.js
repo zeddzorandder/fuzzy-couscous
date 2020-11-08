@@ -17,9 +17,9 @@ export class Page {
         this.logicContext.entities = [];
     }
 
-    changePage = (pageId) => {
+    changePage = (pageId, mode) => {
         this.destroyPage();
-        this.logicContext.switchPage(pageId);
+        this.logicContext.switchPage(pageId, mode);
     }
     
 }

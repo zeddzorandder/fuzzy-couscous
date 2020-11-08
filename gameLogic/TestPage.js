@@ -13,7 +13,7 @@ export class TestPage extends Page {
 
         this.player = this.logicContext.addEntity(new Rectangle("player", 800, 100, "red", 50, 50));
         this.player.properties.directions = [false, false, false, false];
-        this.player.properties.speed = 5;
+        this.player.properties.speed = 10;
 
     }
 
@@ -23,6 +23,7 @@ export class TestPage extends Page {
     }
 
     handlePlayer = () => {
+        //make this load for the player every time
         if (this.player.properties.directions[0]) {
             this.player.vely = -this.player.properties.speed;
         } else {

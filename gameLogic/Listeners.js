@@ -3,12 +3,32 @@ export class ListenerHandler {
     
     constructor(logic){
         this.logic = logic;
+        this.listenersLoaded = false;
     }
 
-    loadListeners = () =>{
-        this.player = this.logic.findEntity("player");
-        document.addEventListener("keypress",(e)=>this.handlePlayerKeyPress(e));
-        document.addEventListener("keyup",(e)=>this.handlePlayerKeyUp(e));
+    loadListeners = (mode) =>{
+
+        if(mode == "playable"){
+            this.player = this.logic.findEntity("player");
+            document.addEventListener("keypress",(e)=>this.handlePlayerKeyPress(e));
+            document.addEventListener("keyup",(e)=>this.handlePlayerKeyUp(e));
+            this.listenersLoaded = true;
+            console.log("listeners loaded");
+        } else {
+            console.log("no listeners added");
+        }
+        
+    }
+
+    removeListeners = () => {
+        if(this.listenersLoaded){
+            document.removeEventListener("keypress",(e)=>this.handlePlayerKeyPress(e));
+            document.removeEventListener("keyup",(e)=>this.handlePlayerKeyUp(e));
+            this.listenersLoaded = false;
+            console.log("listeners removed");
+        } else {
+            console.log("no listeners to remove");
+        }
     }
 
     handlePlayerKeyPress = (e) => {
