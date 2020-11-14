@@ -19,12 +19,17 @@ export class TestPage extends Page {
         this.healthDamage = this.logicContext.addEntity(new Rectangle("healthDamage", 595, 130, "white", 300, 25));
         this.healthBar = this.logicContext.addEntity(new Rectangle("healthbar", 595, 130, "yellow", 25, 25));
         this.healthBar.properties.maxwidth = 300;
+        this.wait = 40;
 
-        this.healthDamage.addBehavior((e)=>{
-            if(this.healthBar.width < e.width){
+        this.healthDamage.addBehavior((e, id)=>{
+            if(this.healthBar.width < e.width && this.wait > 0){
                 e.width--;
             }
-        });
+
+            if(this.logicContext.tick == 240){
+                this.healthDamage.removeBehavior("hdmg");
+            }
+        }, "hdmg");
 
         this.healthBar.addBehavior((e)=>{
             if(e.width >= e.properties.maxwidth * 0.75){
@@ -84,20 +89,17 @@ export class TestPage extends Page {
         }
 
         if(this.player.x >= 1000 && this.player.x <= 1100 && this.player.y >= 200 && this.player.y <= 300){
-            // this.changePage("chesspage");
             if(this.player.properties.health > 0){
                 if(this.logicContext.tick % 60 == 0){
-                    this.dmg = Math.floor(Math.random()*20)+10
+                    this.dmg = Math.floor(Math.random()*12)+1
                     this.player.properties.health -= this.dmg;
                     this.barpos += 65;
-                    this.logicContext.addEntity(new Rectangle(null, this.barpos, 610, "red", 50, -this.dmg*10));
-                    this.logicContext.addEntity(new TextRender(null, this.barpos+15, 610 - this.dmg*10  - 25, this.dmg));
+                    this.logicContext.addEntity(new Rectangle(null, this.barpos, 610, "red", 50, -this.dmg * 40));
+                    this.logicContext.addEntity(new TextRender(null, this.barpos+15, 610 - this.dmg * 40  - 25, this.dmg));
                 }
             }
         }
-
         if(this.player.x >= 400 && this.player.x <= 500 && this.player.y >= 200 && this.player.y <= 300){
-            // this.changePage("chesspage");
             if(this.player.properties.health <= 99){
                 this.player.properties.health++;
                 this.healthDamage.width = this.player.properties.health*3;
