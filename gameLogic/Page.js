@@ -21,5 +21,9 @@ export class Page {
         this.destroyPage();
         this.logicContext.switchPage(pageId, mode);
     }
+
+    addPageEntity = (entity) => {
+        
+    }
     
 }

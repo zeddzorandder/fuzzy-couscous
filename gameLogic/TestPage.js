@@ -1,5 +1,6 @@
 import { Rectangle } from "../entities/Rectangle.js";
 import { TextRender } from "../entities/TextRender.js";
+import { Hexagon } from '../entities/Hexagon.js';
 import { Page } from "./Page.js";
 import * as iHandler from "./InputHandler.js";
 
@@ -14,10 +15,12 @@ export class TestPage extends Page {
 
         this.logicContext.addEntity(new Rectangle("portal", 1000,200,"blue",100,100));
         this.logicContext.addEntity(new Rectangle("healplace", 400, 200, "green", 100,100));
+        this.logicContext.addEntity(new Hexagon(null, 6, 100, 100,100, "purple"));
         
         this.player = this.logicContext.addEntity(new Rectangle("player", 1050, 250, "white", 25, 25));
         this.healthDamage = this.logicContext.addEntity(new Rectangle("healthDamage", 595, 130, "white", 300, 25));
         this.healthBar = this.logicContext.addEntity(new Rectangle("healthbar", 595, 130, "yellow", 25, 25));
+
         this.healthBar.properties.maxwidth = 300;
         this.wait = 40;
 
@@ -103,6 +106,5 @@ export class TestPage extends Page {
             }
         }
     }
-
 
 }
