@@ -26,10 +26,7 @@ export class TestPage extends Page {
                 e.width--;
             }
 
-            if(this.logicContext.tick == 240){
-                this.healthDamage.removeBehavior("hdmg");
-            }
-        }, "hdmg");
+        });
 
         this.healthBar.addBehavior((e)=>{
             if(e.width >= e.properties.maxwidth * 0.75){
