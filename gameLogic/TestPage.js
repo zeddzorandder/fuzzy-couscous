@@ -13,13 +13,13 @@ export class TestPage extends Page {
     loadPage = (state) => {
 
 
-        this.logicContext.addEntity(new Rectangle("portal", 1000,200,"blue",100,100));
-        this.logicContext.addEntity(new Rectangle("healplace", 400, 200, "green", 100,100));
-        this.logicContext.addEntity(new Hexagon(null, 6, 100, 100,100, "purple"));
+        this.addPageEntity(new Rectangle("portal", 1000,200,"blue",100,100));
+        this.addPageEntity(new Rectangle("healplace", 400, 200, "green", 100,100));
+        this.addPageEntity(new Hexagon(null, 6, 100, 100,100, "purple"));
         
-        this.player = this.logicContext.addEntity(new Rectangle("player", 1050, 250, "white", 25, 25));
-        this.healthDamage = this.logicContext.addEntity(new Rectangle("healthDamage", 595, 130, "white", 300, 25));
-        this.healthBar = this.logicContext.addEntity(new Rectangle("healthbar", 595, 130, "yellow", 25, 25));
+        this.player = this.addPageEntity(new Rectangle("player", 1050, 250, "white", 25, 25));
+        this.healthDamage = this.addPageEntity(new Rectangle("healthDamage", 595, 130, "white", 300, 25));
+        this.healthBar = this.addPageEntity(new Rectangle("healthbar", 595, 130, "yellow", 25, 25));
 
         this.healthBar.properties.maxwidth = 300;
         this.wait = 40;
@@ -56,10 +56,10 @@ export class TestPage extends Page {
             }
         });
 
-        this.ui_playerXPos = this.logicContext.addEntity(new TextRender("sgfas", 500,75, ""));
-        this.ui_playerYPos = this.logicContext.addEntity(new TextRender("wertwer", 700,75, ""));
-        this.ui_playerHealth = this.logicContext.addEntity(new TextRender("wertwer", 850,75, ""));
-        this.ui_tick = this.logicContext.addEntity(new TextRender("sdvgsd", 1100,75, ""));
+        this.ui_playerXPos = this.addPageEntity(new TextRender("sgfas", 500,75, ""));
+        this.ui_playerYPos = this.addPageEntity(new TextRender("wertwer", 700,75, ""));
+        this.ui_playerHealth = this.addPageEntity(new TextRender("wertwer", 850,75, ""));
+        this.ui_tick = this.addPageEntity(new TextRender("sdvgsd", 1100,75, ""));
 
         this.abspos = 0;
         this.dmg = 0;
@@ -94,8 +94,8 @@ export class TestPage extends Page {
                     this.dmg = Math.floor(Math.random()*12)+1
                     this.player.properties.health -= this.dmg;
                     this.barpos += 65;
-                    this.logicContext.addEntity(new Rectangle(null, this.barpos, 610, "red", 50, -this.dmg * 40));
-                    this.logicContext.addEntity(new TextRender(null, this.barpos+15, 610 - this.dmg * 40  - 25, this.dmg));
+                    this.addPageEntity(new Rectangle(null, this.barpos, 610, "red", 50, -this.dmg * 40));
+                    this.addPageEntity(new TextRender(null, this.barpos+15, 610 - this.dmg * 40  - 25, this.dmg));
                 }
             }
         }

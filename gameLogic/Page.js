@@ -23,7 +23,7 @@ export class Page {
     }
 
     addPageEntity = (entity) => {
-        
+        return this.logicContext.addEntity(entity);
     }
     
 }
