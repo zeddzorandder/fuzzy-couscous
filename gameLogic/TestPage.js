@@ -1,23 +1,31 @@
 import { Rectangle } from "../entities/Rectangle.js";
 import { TextRender } from "../entities/TextRender.js";
 import { Hexagon } from '../entities/Hexagon.js';
+import { Polygon } from '../entities/Polygon.js';
 import { Page } from "./Page.js";
 import * as iHandler from "./InputHandler.js";
 
 export class TestPage extends Page {
-    constructor(logicContext, id) {
-        super(logicContext, id)
+    constructor(lc, id) {
+        super(lc, id)
     }
 
     // This is the main loop for the "page"
-    loadPage = (state) => {
-
+    loadPage = (state) => { 
 
         this.addPageEntity(new Rectangle("portal", 1000,200,"blue",100,100));
         this.addPageEntity(new Rectangle("healplace", 400, 200, "green", 100,100));
-        this.addPageEntity(new Hexagon(null, 6, 100, 100,100, "purple"));
+        this.addPageEntity(new Hexagon(null, 6, 100, 200 ,300, "purple"));
+        this.addPageEntity(new Polygon(null, 300, 50, null, "green"));
+        var a = this.addPageEntity(new Rectangle("prikaz", 600,600,"purple", 100,100));
+        a.addBehavior((e)=>{
+            if(e.x <= 650) e.velx = 1;
+            if(e.x >= 900) e.velx = -1; 
+
+            e.x += e.velx;
+        });
         
-        this.player = this.addPageEntity(new Rectangle("player", 1050, 250, "white", 25, 25));
+        this.player = this.addPageEntity(new Rectangle("player", 1050, 150, "white", 25, 25));
         this.healthDamage = this.addPageEntity(new Rectangle("healthDamage", 595, 130, "white", 300, 25));
         this.healthBar = this.addPageEntity(new Rectangle("healthbar", 595, 130, "yellow", 25, 25));
 
@@ -94,8 +102,8 @@ export class TestPage extends Page {
                     this.dmg = Math.floor(Math.random()*12)+1
                     this.player.properties.health -= this.dmg;
                     this.barpos += 65;
-                    this.addPageEntity(new Rectangle(null, this.barpos, 610, "red", 50, -this.dmg * 40));
-                    this.addPageEntity(new TextRender(null, this.barpos+15, 610 - this.dmg * 40  - 25, this.dmg));
+                    this.addPageEntity(new Rectangle(null, this.barpos, 610, "red", 50, -this.dmg * 20));
+                    this.addPageEntity(new TextRender(null, this.barpos+15, 610 - this.dmg * 20  - 25, this.dmg));
                 }
             }
         }
