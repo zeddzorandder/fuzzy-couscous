@@ -2,9 +2,9 @@ import { Rectangle } from "../entities/Rectangle.js";
 import { TextRender } from "../entities/TextRender.js";
 import { Hexagon } from '../entities/Hexagon.js';
 import { Polygon } from '../entities/Polygon.js';
-import { Page } from "./Page.js";
+import { Page } from "../gameLogic/Page.js";
 import { Sprite } from "../entities/Sprite.js";
-import * as iHandler from "./InputHandler.js";
+import * as iHandler from "../gameLogic/InputHandler.js";
 
 export class SuperTestPage extends Page {
 

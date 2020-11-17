@@ -2,8 +2,8 @@ import * as cfg from './LogicConfig.js';
 // import * as listeners from './Listeners.js';
 import { ListenerHandler } from './Listeners.js';
 import { ChessPage } from './ChessPage.js';
-import { TestPage } from './TestPage.js';
-import { SuperTestPage } from './SuperTestPage.js';
+import { TestPage } from '../pages/TestPage.js';
+import { SuperTestPage } from '../pages/SuperTestPage.js';
 
 export class Logic{
     
