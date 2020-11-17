@@ -3,6 +3,7 @@ import * as cfg from './LogicConfig.js';
 import { ListenerHandler } from './Listeners.js';
 import { ChessPage } from './ChessPage.js';
 import { TestPage } from './TestPage.js';
+import { SuperTestPage } from './SuperTestPage.js';
 
 export class Logic{
     
@@ -18,8 +19,10 @@ export class Logic{
 
         this.initPage("chesspage", new ChessPage(this));
         this.initPage("testpage", new TestPage(this));
+        this.initPage("supertestpage", new SuperTestPage(this));
         
-        this.switchPage("testpage", "playable");
+        this.switchPage("supertestpage", "playable");
+
 
 
         setInterval(() => { // i don't like it. But it has to be this way.
