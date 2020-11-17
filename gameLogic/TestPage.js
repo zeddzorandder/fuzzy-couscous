@@ -3,6 +3,7 @@ import { TextRender } from "../entities/TextRender.js";
 import { Hexagon } from '../entities/Hexagon.js';
 import { Polygon } from '../entities/Polygon.js';
 import { Page } from "./Page.js";
+import { Sprite } from "../entities/Sprite.js";
 import * as iHandler from "./InputHandler.js";
 
 export class TestPage extends Page {
@@ -18,6 +19,8 @@ export class TestPage extends Page {
         this.addPageEntity(new Hexagon(null, 6, 100, 200 ,300, "purple"));
         this.addPageEntity(new Polygon(null, 300, 50, null, "green"));
         var a = this.addPageEntity(new Rectangle("prikaz", 600,600,"purple", 100,100));
+
+
         a.addBehavior((e)=>{
             if(e.x <= 650) e.velx = 1;
             if(e.x >= 900) e.velx = -1; 
@@ -25,7 +28,28 @@ export class TestPage extends Page {
             e.x += e.velx;
         });
         
-        this.player = this.addPageEntity(new Rectangle("player", 1050, 150, "white", 25, 25));
+        
+        this.player = this.addPageEntity(new Sprite("player", 1050, 150,110,130, '../assets/run.ping.png', ""));
+        this.player.addBehavior((e) => {
+
+
+            if(this.logicContext.tick % 10 == 0){
+                e.imageFrame++;
+                if(e.imageFrame > 4 && e.imagePage == 0){
+                    e.imageFrame = 1;
+                    e.imagePage = 1;
+                }
+                if(e.imageFrame > 4 && e.imagePage == 1){
+                    e.imageFrame = 1;
+                    e.imagePage = 0;
+                }
+                e.sliceX = 33+(170*e.imageFrame);
+                e.sliceY = 43+e.imagePage*170;
+            }
+
+
+        });
+
         this.healthDamage = this.addPageEntity(new Rectangle("healthDamage", 595, 130, "white", 300, 25));
         this.healthBar = this.addPageEntity(new Rectangle("healthbar", 595, 130, "yellow", 25, 25));
 
@@ -72,6 +96,7 @@ export class TestPage extends Page {
         this.abspos = 0;
         this.dmg = 0;
         this.barpos = 0;
+
     }
 
     processPage = () => {

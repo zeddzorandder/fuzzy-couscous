@@ -10,6 +10,9 @@ Just messing around with canvass.
     4. add physics
     5. add render weight
     6. Add ability to save the state of a room
+    7. Add sprites
+    8. Add Sounds
+    9. Add rotation
 
 
 DONE:

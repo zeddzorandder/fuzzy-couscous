@@ -16,5 +16,6 @@ export class Hexagon extends Entity {
           }
         ctx.closePath();
         ctx.fill();
+        
     }
 }
