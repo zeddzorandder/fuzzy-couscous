@@ -10,10 +10,23 @@ export class SuperTestPage extends Page {
 
     loadPage = () => {
         this.addPageEntity(new Rectangle(null, 500,200, "blue", 200,100));
+        this.player = this.addPageEntity(new Rectangle("player", 500, 500, "red", 100,100));
+
+
+        this.player.properties.directions = [false, false, false, false];
+        this.player.properties.speed = 5;
+        this.player.properties.health = 100;
+
+
+
+        this.changePage("testpage", "playable");
+        // this.changePage("chesspage"); 
+
     }
 
     processPage = () => {
 
+        
     }
 
 }

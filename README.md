@@ -10,10 +10,12 @@ Just messing around with canvass.
     4. add physics
     5. add render weight
     6. Add ability to save the state of a room
-    7. Add sprites
     8. Add Sounds
     9. Add rotation
 
+
+URGENT:
+Rework Listeners and Input handler, then finish polygons and then completely finish the animation system
 
 DONE:
     added functionality to remove behaviors. You can remove the behavior either by the Id you generate/create or by the internal

@@ -1,7 +1,7 @@
 import * as cfg from './LogicConfig.js';
 // import * as listeners from './Listeners.js';
 import { ListenerHandler } from './Listeners.js';
-import { ChessPage } from './ChessPage.js';
+import { ChessPage } from '../pages/ChessPage.js';
 import { TestPage } from '../pages/TestPage.js';
 import { SuperTestPage } from '../pages/SuperTestPage.js';
 
@@ -14,6 +14,7 @@ export class Logic{
         this.second = Math.ceil(1000/(1000/cfg.INTERVAL)); //sort of ok, i guess.
         this.activePage = "";
         this.listeners = new ListenerHandler(this);
+        this.event = [];
 
         this.pages = {};
 
@@ -21,7 +22,7 @@ export class Logic{
         this.initPage("testpage", new TestPage(this));
         this.initPage("supertestpage", new SuperTestPage(this));
         
-        this.switchPage("supertestpage", "playable");
+        this.switchPage("supertestpage", "clickable");
 
 
 

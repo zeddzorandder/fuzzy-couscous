@@ -1,6 +1,6 @@
 import * as chess from '../entities/figures/chessboard.js';
 import { TextRender } from '../entities/TextRender.js';
-import { Page } from "./Page.js";
+import { Page } from "../gameLogic/Page.js";
 /*
     Pages are the "levels" you make. Currently, they are still under construction.
     To make a level, you create a Page. You can name it whatever, it doesn't use any kind of inheritance.

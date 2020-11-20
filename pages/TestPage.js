@@ -29,26 +29,34 @@ export class TestPage extends Page {
         });
         
         
-        this.player = this.addPageEntity(new Sprite("player", 1050, 150,110,130, '../assets/run.ping.png', ""));
+        this.player = this.addPageEntity(new Sprite("player", 1050, 100, 75,80, '../assets/betterrun.png', ""));
         this.player.addBehavior((e) => {
 
-
-            if(this.logicContext.tick % 10 == 0){
+            if(this.logicContext.tick % 3 == 0){
                 e.imageFrame++;
-                if(e.imageFrame > 4 && e.imagePage == 0){
-                    e.imageFrame = 1;
+                if(e.imageFrame > 6 && e.imagePage == 0){
+                    e.imageFrame = 0;
                     e.imagePage = 1;
                 }
-                if(e.imageFrame > 4 && e.imagePage == 1){
-                    e.imageFrame = 1;
+                if(e.imageFrame > 6 && e.imagePage == 1){
+                    e.imageFrame = 0;
+                    e.imagePage = 2;
+                }
+                if(e.imageFrame > 6 && e.imagePage == 2){
+                    e.imageFrame = 0;
+                    e.imagePage = 3;
+                }
+                if(e.imageFrame > 5 && e.imagePage == 3){
+                    e.imageFrame = 0;
                     e.imagePage = 0;
                 }
-                e.sliceX = 33+(170*e.imageFrame);
-                e.sliceY = 43+e.imagePage*170;
+                e.sliceX = 74*e.imageFrame;
+                e.sliceY = 86*e.imagePage;
             }
 
 
         });
+
 
         this.healthDamage = this.addPageEntity(new Rectangle("healthDamage", 595, 130, "white", 300, 25));
         this.healthBar = this.addPageEntity(new Rectangle("healthbar", 595, 130, "yellow", 25, 25));
@@ -93,6 +101,9 @@ export class TestPage extends Page {
         this.ui_playerHealth = this.addPageEntity(new TextRender("wertwer", 850,75, ""));
         this.ui_tick = this.addPageEntity(new TextRender("sdvgsd", 1100,75, ""));
 
+        this.ui_clickTestX = this.addPageEntity(new TextRender("fvsdfnj", 500,500,"ff"));
+        this.ui_clickTestY = this.addPageEntity(new TextRender("fvsdfnj", 600,500,"ff"));
+
         this.abspos = 0;
         this.dmg = 0;
         this.barpos = 0;
@@ -108,6 +119,9 @@ export class TestPage extends Page {
         this.ui_playerYPos.text = "Y: "+this.player.y;
         this.ui_playerHealth.text = "hp: "+this.player.properties.health;
         this.ui_tick.text = Math.floor(this.logicContext.tick/60);
+
+        this.ui_clickTestX.text = this.getEvent()[0];
+        this.ui_clickTestY.text = this.getEvent()[1];
     }
 
 

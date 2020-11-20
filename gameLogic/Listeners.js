@@ -15,6 +15,10 @@ export class ListenerHandler {
             this.listenersLoaded = true;
         }
         
+        if(mode == "clickable"){
+            document.addEventListener("click", (e) => this.handleClick(e));
+            this.listenersLoaded = true;
+        }
     }
 
     // This should be made to work dynamically , regardless of mode or handler used.
@@ -22,8 +26,13 @@ export class ListenerHandler {
         if(this.listenersLoaded){
             document.removeEventListener("keypress",(e)=>this.handlePlayerKeyPress(e));
             document.removeEventListener("keyup",(e)=>this.handlePlayerKeyUp(e));
+            document.removeEventListener("click",(e)=>this.handleClick(e));
             this.listenersLoaded = false;
         }
+    }
+
+    handleClick = (e) => {
+        this.logic.event = [e.pageX, e.pageY];
     }
 
     handlePlayerKeyPress = (e) => {

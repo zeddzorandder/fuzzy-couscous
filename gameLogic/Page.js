@@ -25,5 +25,9 @@ export class Page {
     addPageEntity = (entity) => {
         return this.logicContext.addEntity(entity);
     }
+
+    getEvent = () => {
+        return this.logicContext.event;
+    }
     
 }

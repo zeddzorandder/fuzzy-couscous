@@ -9,17 +9,21 @@ export class Sprite extends Entity {
         this.height = height;
         this.width = width;
 
-        this.imageFrame = 1;
+        this.imageFrame = 0;
         this.imagePage = 0;
         
         //TEST VARIABLES, DELETE LATER!!!
         // this.sliceX = 33+(170*this.imageFrame);
         // this.sliceY = 43+this.imagePage;
+
+        this.sliceX = this.imageFrame * 75;
+        this.sliceY = 0;
     }
 
     render = (ctx) => {
         // ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 
+        // ctx.drawImage(this.img, this.sliceX, this.sliceY, this.width,  this.height, this.x, this.y, this.width, this.height);
         ctx.drawImage(this.img, this.sliceX, this.sliceY, this.width,  this.height, this.x, this.y, this.width, this.height);
     }
 
