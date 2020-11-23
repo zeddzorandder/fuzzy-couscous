@@ -22,7 +22,7 @@ export class Logic{
         this.initPage("testpage", new TestPage(this));
         this.initPage("supertestpage", new SuperTestPage(this));
         
-        this.switchPage("supertestpage", "clickable");
+        this.switchPage("testpage", "clickable");
 
 
 

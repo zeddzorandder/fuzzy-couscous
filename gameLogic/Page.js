@@ -30,4 +30,7 @@ export class Page {
         return this.logicContext.event;
     }
     
+    getEntities = () => {
+        return this.logicContext.entities;
+    }
 }

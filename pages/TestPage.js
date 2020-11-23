@@ -120,8 +120,20 @@ export class TestPage extends Page {
         this.ui_playerHealth.text = "hp: "+this.player.properties.health;
         this.ui_tick.text = Math.floor(this.logicContext.tick/60);
 
-        this.ui_clickTestX.text = this.getEvent()[0];
-        this.ui_clickTestY.text = this.getEvent()[1];
+        this.ui_clickTestX.text = this.getEvent().clientX;
+        this.ui_clickTestY.text = this.getEvent().clientY;
+
+        if(this.getEvent()[0] != undefined){
+            this.getEntities().forEach(entity => {
+                
+                if(this.getEvent()[0] >= entity.x && 
+                   this.getEvent()[0] <= entity.x + entity.width &&
+                   this.getEvent()[1] >= entity.y && this.getEvent()[1] <= entity.y + entity.height 
+                   ){
+                    entity.color = `#${this.getEvent()[0]%10}${this.getEvent()[1]%10}${this.logicContext.tick%10}`;
+                }
+            });
+        }
     }
 
 

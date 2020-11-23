@@ -32,9 +32,11 @@ export class ListenerHandler {
     }
 
     handleClick = (e) => {
-        this.logic.event = [e.pageX, e.pageY];
+        this.logic.event = e;
+        console.log(e);
     }
 
+    // Why is this still here???
     handlePlayerKeyPress = (e) => {
         if(e.code == "KeyW"){
             this.player.properties.directions[0] = true;
