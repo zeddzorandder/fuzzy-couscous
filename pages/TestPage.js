@@ -13,9 +13,9 @@ export class TestPage extends Page {
 
     // This is the main loop for the "page"
     loadPage = (state) => { 
-
         this.addPageEntity(new Rectangle("portal", 1000,200,"blue",100,100));
         this.addPageEntity(new Rectangle("healplace", 400, 200, "green", 100,100));
+        this.addPageEntity(new Rectangle("portal", 400, 400, "purple", 100, 100));
         this.addPageEntity(new Hexagon(null, 6, 100, 200 ,300, "purple"));
         this.addPageEntity(new Polygon(null, 300, 50, null, "green"));
         var a = this.addPageEntity(new Rectangle("prikaz", 600,600,"purple", 100,100));
@@ -101,8 +101,8 @@ export class TestPage extends Page {
         this.ui_playerHealth = this.addPageEntity(new TextRender("wertwer", 850,75, ""));
         this.ui_tick = this.addPageEntity(new TextRender("sdvgsd", 1100,75, ""));
 
-        this.ui_clickTestX = this.addPageEntity(new TextRender("fvsdfnj", 500,500,"ff"));
-        this.ui_clickTestY = this.addPageEntity(new TextRender("fvsdfnj", 600,500,"ff"));
+        this.ui_clickTestX = this.addPageEntity(new TextRender("fvsdfnj", 500,500,"X"));
+        this.ui_clickTestY = this.addPageEntity(new TextRender("fvsdfnj", 600,500,"Y"));
 
         this.abspos = 0;
         this.dmg = 0;
@@ -112,6 +112,7 @@ export class TestPage extends Page {
 
     processPage = () => {
         this.handlePlayer();
+        let event = this.getEvent();    // is this good?
 
         this.healthBar.width = this.player.properties.health*3;
 
@@ -120,19 +121,13 @@ export class TestPage extends Page {
         this.ui_playerHealth.text = "hp: "+this.player.properties.health;
         this.ui_tick.text = Math.floor(this.logicContext.tick/60);
 
-        this.ui_clickTestX.text = this.getEvent().clientX;
-        this.ui_clickTestY.text = this.getEvent().clientY;
 
-        if(this.getEvent()[0] != undefined){
-            this.getEntities().forEach(entity => {
-                
-                if(this.getEvent()[0] >= entity.x && 
-                   this.getEvent()[0] <= entity.x + entity.width &&
-                   this.getEvent()[1] >= entity.y && this.getEvent()[1] <= entity.y + entity.height 
-                   ){
-                    entity.color = `#${this.getEvent()[0]%10}${this.getEvent()[1]%10}${this.logicContext.tick%10}`;
-                }
-            });
+        if(event.type == "click"){
+            this.ui_clickTestX.text = event.clientX;
+            this.ui_clickTestY.text = event.clientY;
+
+            this.findPageEntity("player").x = event.clientX;
+            this.findPageEntity("player").y = event.clientY;
         }
     }
 
@@ -158,11 +153,18 @@ export class TestPage extends Page {
                 }
             }
         }
+
+
         if(this.player.x >= 400 && this.player.x <= 500 && this.player.y >= 200 && this.player.y <= 300){
             if(this.player.properties.health <= 99){
                 this.player.properties.health++;
                 this.healthDamage.width = this.player.properties.health*3;
             }
+        }
+
+        if(this.player.x >= 400 && this.player.x <= 500 && this.player.y >= 400 && this.player.y <= 500){
+            
+            this.changePage("supertestpage", "playable");
         }
     }
 

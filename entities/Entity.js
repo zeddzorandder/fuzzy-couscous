@@ -1,5 +1,5 @@
 export class Entity {
-    constructor(id, x, y, color, sprite = null, ...args) {
+    constructor(id, x, y, color, ...args) {
         if (id == null) {
             this.id = Math.floor(Math.random() * 100000000);
         } else {
@@ -7,9 +7,8 @@ export class Entity {
         }
         this.x = x;
         this.y = y;
-        this.color = color;
-        this.sprite = sprite;
         (args.length >= 0 ? this.parent = args[0] : this.parent = null);
+        this.color = color;
         this.behaviors = [];
         this.children = [];
         this.velx = 0;

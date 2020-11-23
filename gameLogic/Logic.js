@@ -1,39 +1,39 @@
 import * as cfg from './LogicConfig.js';
-// import * as listeners from './Listeners.js';
 import { ListenerHandler } from './Listeners.js';
 import { ChessPage } from '../pages/ChessPage.js';
 import { TestPage } from '../pages/TestPage.js';
 import { SuperTestPage } from '../pages/SuperTestPage.js';
-
+/*
+    The core of the engine. Logic is responsible for storing all entity objects and for sending them to the renderer to be displayed on the screen,
+    as well as the addition of new entities, the execution of their behaviors, the pages the entities are instantiated in and keeping track
+    of various other metadata like a seconds, frame ticks etc.
+**/
 export class Logic{
     
     constructor(renderer){
         this.renderer = renderer;
         this.entities = [];
         this.tick = 0;
-        this.second = Math.ceil(1000/(1000/cfg.INTERVAL)); //sort of ok, i guess.
+        this.second = Math.ceil(1000/(1000/cfg.INTERVAL)); 
         this.activePage = "";
         this.listeners = new ListenerHandler(this);
         this.event = [];
-
         this.pages = {};
 
         this.initPage("chesspage", new ChessPage(this));
         this.initPage("testpage", new TestPage(this));
         this.initPage("supertestpage", new SuperTestPage(this));
-        
-        this.switchPage("testpage", "clickable");
+        this.switchPage("testpage", "playable");
 
-
-
-        setInterval(() => { // i don't like it. But it has to be this way.
+        // The game loop. Tells the renderer to render everything and executes whatever code is in the current
+        //active pages "processPage" function.
+        setInterval(() => { 
             renderer.render();
             this.tick+=1;
             if(this.tick >= 1920){
                 this.tick = 0;
             }
             this.pages[this.activePage].obj.processPage();
-
             update(this.entities);
         }, 1000/cfg.INTERVAL);
     }
@@ -43,7 +43,6 @@ export class Logic{
         this.activePage = pageName;
         this.pages[pageName].obj.loadPage();
         this.listeners.loadListeners(mode);
-
     }
 
     initPage = (pageName, pageObject) => {

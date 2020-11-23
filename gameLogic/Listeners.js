@@ -7,11 +7,11 @@ export class ListenerHandler {
     }
 
     loadListeners = (mode) =>{
-
         if(mode == "playable"){
             this.player = this.logic.findEntity("player");
             document.addEventListener("keypress",(e)=>this.handlePlayerKeyPress(e));
             document.addEventListener("keyup",(e)=>this.handlePlayerKeyUp(e));
+            document.addEventListener("click", (e) => this.handleClick(e));
             this.listenersLoaded = true;
         }
         
@@ -33,11 +33,10 @@ export class ListenerHandler {
 
     handleClick = (e) => {
         this.logic.event = e;
-        console.log(e);
     }
 
-    // Why is this still here???
     handlePlayerKeyPress = (e) => {
+        this.logic.event = e;
         if(e.code == "KeyW"){
             this.player.properties.directions[0] = true;
         }
@@ -66,4 +65,7 @@ export class ListenerHandler {
             this.player.properties.directions[3] = false;
         }
     }
+
+
+
 }

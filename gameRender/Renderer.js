@@ -13,7 +13,6 @@ export class Renderer {
 }
 
 function refreshScreen() {
-    
     ctx.fillStyle = cfg.BACKGROUND_COLOR;
     ctx.fillRect(0, 0, c.width, c.height);
     ctx.fillStyle = cfg.DEFAULT_STROKE_COLOR;

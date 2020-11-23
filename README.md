@@ -15,7 +15,8 @@ Just messing around with canvass.
 
 
 URGENT:
-Rework Listeners and Input handler, then finish polygons and then completely finish the animation system
+REWORK ENTITIES!! CLEAN AND REFACTOR EVERYTHING
+finish polygons and then completely finish the animation system
 
 DONE:
     added functionality to remove behaviors. You can remove the behavior either by the Id you generate/create or by the internal
