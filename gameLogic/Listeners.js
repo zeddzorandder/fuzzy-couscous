@@ -14,6 +14,13 @@ export class ListenerHandler {
             document.addEventListener("click", (e) => this.handleClick(e));
             this.listenersLoaded = true;
         }
+
+        if(mode == "edit"){
+            document.addEventListener("keypress",(e)=>this.handlePlayerKeyPress(e));
+            document.addEventListener("keyup",(e)=>this.handlePlayerKeyUp(e));
+            document.addEventListener("click", (e) => this.handleClick(e));
+            document.addEventListener("mousedown", (e) => this.handleMouseDown(e));
+        }
         
         if(mode == "clickable"){
             document.addEventListener("click", (e) => this.handleClick(e));
@@ -35,8 +42,11 @@ export class ListenerHandler {
         this.logic.event = e;
     }
 
-    handlePlayerKeyPress = (e) => {
+    handleMouseDown = (e) => {
         this.logic.event = e;
+    }
+
+    handlePlayerKeyPress = (e) => {
         if(e.code == "KeyW"){
             this.player.properties.directions[0] = true;
         }

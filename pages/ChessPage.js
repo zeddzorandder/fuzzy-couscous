@@ -16,7 +16,7 @@ export class ChessPage extends Page {
         fields[63].addBehavior((e)=>{
             e.x+=1;
             if(e.x == 750){
-                this.changePage("testpage", "playable");
+                this.changePage("snakepage", "playable");
             }
         });
 

@@ -12,6 +12,7 @@ Just messing around with canvass.
     6. Add ability to save the state of a room
     8. Add Sounds
     9. Add rotation
+    10. Add wait
 
 
 URGENT:

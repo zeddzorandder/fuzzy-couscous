@@ -32,6 +32,20 @@ export class Page {
         this.logicContext.switchPage(pageId, mode);
     }
 
+    collides2D = (entity1, entity2) => {
+        return entity1.x < entity2.x + entity2.width &&
+               entity1.x + entity1.width > entity2.x &&
+               entity1.y < entity2.y + entity2.height &&
+               entity1.y + entity1.height > entity2.y
+    }
+
+    collidesClick = (entity, event) => {
+        event = this.getEvent();
+        return event.type === "click" && (
+            event.clientX > entity.x && event.clientY > entity.y
+        );
+    }
+
     // Adds an entity to the entity list
     addPageEntity = (entity) => {
         return this.logicContext.addEntity(entity);
@@ -39,6 +53,10 @@ export class Page {
 
     findPageEntity = (entityId) => {
         return this.logicContext.findEntity(entityId);
+    }
+
+    removePageEntity = (entityId) => {
+        this.logicContext.removeEntity(entityId);
     }
 
     // Returns the eventlistener event. You can either pass the and get just the value, or leave it empty and receive the whole event object

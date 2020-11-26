@@ -13,10 +13,17 @@ export class SuperTestPage extends Page {
         this.player = this.addPageEntity(new Rectangle("player", 500, 100, "red", 100,100));
         this.addPageEntity(new Rectangle("portal", 400, 400, "purple", 100, 100));
 
+        this.test = this.addPageEntity(new Rectangle("test", 800, 300, "yellow", 100,100));
+
         this.player.properties.directions = [false, false, false, false];
         this.player.properties.speed = 5;
         this.player.properties.health = 100;
 
+        // this.test.addBehavior((e)=>{
+        //     if(this.collidesClick(e)){
+        //         e.color = "red";
+        //     }
+        // });
         // this.changePage("testpage", "playable");
     }
 
@@ -24,6 +31,11 @@ export class SuperTestPage extends Page {
         iHandler.playerMovement(this.player);
         if(this.player.x >= 400 && this.player.x <= 500 && this.player.y >= 400 && this.player.y <= 500){
             this.changePage("testpage", "playable");
+        }
+
+        if(this.collidesClick(this.test)){
+            this.test.x = 100;
+            this.test.y = 100;
         }
         
     }

@@ -13,7 +13,7 @@ export class TestPage extends Page {
 
     // This is the main loop for the "page"
     loadPage = (state) => { 
-        this.addPageEntity(new Rectangle("portal", 1000,200,"blue",100,100));
+        this.addPageEntity(new Rectangle("dmgplace", 1000,200,"blue",100,100));
         this.addPageEntity(new Rectangle("healplace", 400, 200, "green", 100,100));
         this.addPageEntity(new Rectangle("portal", 400, 400, "purple", 100, 100));
         this.addPageEntity(new Hexagon(null, 6, 100, 200 ,300, "purple"));
@@ -142,7 +142,14 @@ export class TestPage extends Page {
             this.player.x = -20;
         }
 
-        if(this.player.x >= 1000 && this.player.x <= 1100 && this.player.y >= 200 && this.player.y <= 300){
+        if(this.player.y < -30){
+            this.player.y = 750;
+        }
+        if(this.player.y > 750){
+            this.player.y = -30;
+        }
+
+        if(this.collides2D(this.player, this.findPageEntity("dmgplace"))){
             if(this.player.properties.health > 0){
                 if(this.logicContext.tick % 60 == 0){
                     this.dmg = Math.floor(Math.random()*12)+1
@@ -155,17 +162,18 @@ export class TestPage extends Page {
         }
 
 
-        if(this.player.x >= 400 && this.player.x <= 500 && this.player.y >= 200 && this.player.y <= 300){
+        if(this.collides2D(this.player, this.findPageEntity("healplace"))){
             if(this.player.properties.health <= 99){
                 this.player.properties.health++;
                 this.healthDamage.width = this.player.properties.health*3;
             }
         }
 
-        if(this.player.x >= 400 && this.player.x <= 500 && this.player.y >= 400 && this.player.y <= 500){
+        if(this.collides2D(this.player, this.findPageEntity("portal"))){
             
             this.changePage("supertestpage", "playable");
         }
+
     }
 
 }

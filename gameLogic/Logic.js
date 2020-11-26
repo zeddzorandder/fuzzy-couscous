@@ -3,6 +3,9 @@ import { ListenerHandler } from './Listeners.js';
 import { ChessPage } from '../pages/ChessPage.js';
 import { TestPage } from '../pages/TestPage.js';
 import { SuperTestPage } from '../pages/SuperTestPage.js';
+import { SnakePage } from '../pages/SnakePage.js';
+import { GameOverPage } from '../pages/GameOverPage.js';
+import { SnakePageSecond } from '../pages/SnakePageSecond.js';
 /*
     The core of the engine. Logic is responsible for storing all entity objects and for sending them to the renderer to be displayed on the screen,
     as well as the addition of new entities, the execution of their behaviors, the pages the entities are instantiated in and keeping track
@@ -23,6 +26,9 @@ export class Logic{
         this.initPage("chesspage", new ChessPage(this));
         this.initPage("testpage", new TestPage(this));
         this.initPage("supertestpage", new SuperTestPage(this));
+        this.initPage("snakepage", new SnakePage(this));
+        this.initPage("gameoverpage", new GameOverPage(this));
+        this.initPage("snakepagelvl2", new SnakePageSecond(this));
         this.switchPage("testpage", "playable");
 
         // The game loop. Tells the renderer to render everything and executes whatever code is in the current
@@ -58,6 +64,14 @@ export class Logic{
         for(let i = 0; i < this.entities.length; i++){
             if(this.entities[i].id == id){
                 return this.entities[i];
+            }
+        }
+    }
+
+    removeEntity = (id) => {
+        for(let i = 0; i < this.entities.length; i++){
+            if(this.entities[i].id == id){
+                this.entities.splice(i, 1);
             }
         }
     }
