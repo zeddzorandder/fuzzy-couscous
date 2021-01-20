@@ -13,14 +13,6 @@ export class ChessPage extends Page {
 
     loadPage = (state) => {
        var fields = chess.loadChessboard(this.logicContext);
-        fields[63].addBehavior((e)=>{
-            e.x+=1;
-            if(e.x == 750){
-                this.changePage("snakepage", "playable");
-            }
-        });
-
-        this.logicContext.addEntity(new TextRender("asdasd",750,600,"GAME OVER"));
     }
 
 }

@@ -13,6 +13,7 @@ Just messing around with canvass.
     8. Add Sounds
     9. Add rotation
     10. Add wait
+    11. Make graphics config accessable from any page
 
 
 URGENT:

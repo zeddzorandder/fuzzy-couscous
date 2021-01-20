@@ -5,7 +5,6 @@ import { TestPage } from '../pages/TestPage.js';
 import { SuperTestPage } from '../pages/SuperTestPage.js';
 import { SnakePage } from '../pages/SnakePage.js';
 import { GameOverPage } from '../pages/GameOverPage.js';
-import { SnakePageSecond } from '../pages/SnakePageSecond.js';
 /*
     The core of the engine. Logic is responsible for storing all entity objects and for sending them to the renderer to be displayed on the screen,
     as well as the addition of new entities, the execution of their behaviors, the pages the entities are instantiated in and keeping track
@@ -28,8 +27,9 @@ export class Logic{
         this.initPage("supertestpage", new SuperTestPage(this));
         this.initPage("snakepage", new SnakePage(this));
         this.initPage("gameoverpage", new GameOverPage(this));
-        this.initPage("snakepagelvl2", new SnakePageSecond(this));
-        this.switchPage("testpage", "playable");
+        // this.switchPage("snakepage", "playable");
+        this.switchPage("chesspage", "edit");
+
 
         // The game loop. Tells the renderer to render everything and executes whatever code is in the current
         //active pages "processPage" function.

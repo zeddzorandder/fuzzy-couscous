@@ -15,11 +15,11 @@ export class GameOverPage extends Page {
         this.addPageEntity(new TextRender("tryagain", 700, 650, "Try Again", "purple"));
 
 
-        this.addPageEntity(new Rectangle("clock", 0, 300, "blue", 10, 10));
+        this.addPageEntity(new Rectangle("clock", 0, 900, "blue", 10, 10));
         this.findPageEntity("clock").addBehavior((e)=>{
             e.x += 1;
             if(e.x >= 120){
-                // this.changePage("snakepage", "playable");
+                this.changePage("snakepage", "playable");
                 e.x = 0;
             }
         });

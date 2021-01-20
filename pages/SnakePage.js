@@ -14,7 +14,17 @@ export class SnakePage extends Page {
     }
 
     loadPage = () => {
-        this.player = this.addPageEntity(new Rectangle("player", 700, 300, "yellow", 25, 25));
+        this.background1 = this.addPageEntity(new Sprite("bg1", 450,0, 500,500, "../assets/grass.png"));
+        this.background2 = this.addPageEntity(new Sprite("bg2", 900,0, 500,500, "../assets/grass.png"));
+        this.background3 = this.addPageEntity(new Sprite("bg3", 1350,0, 500,500, "../assets/grass.png"));
+        this.background4 = this.addPageEntity(new Sprite("bg4", 0,450, 500,500, "../assets/grass.png"));
+        this.background4 = this.addPageEntity(new Sprite("bg4", 0,0, 500,500, "../assets/grass.png"));
+        this.background4 = this.addPageEntity(new Sprite("bg4", 450,450, 500,500, "../assets/grass.png"));
+        this.background4 = this.addPageEntity(new Sprite("bg4", 900,450, 500,500, "../assets/grass.png"));
+        this.background4 = this.addPageEntity(new Sprite("bg4", 1350,450, 500,500, "../assets/grass.png"));
+
+
+        this.player = this.addPageEntity(new Rectangle("player", 700, 300, "black", 25, 25));
         this.exitLevel = this.addPageEntity(new Rectangle("exit", 600, 900, "purple", 50, 50));
        var x = 0; 
         this.player.properties.directions = [false, false, false, false];
@@ -89,30 +99,14 @@ export class SnakePage extends Page {
         if(this.collides2D(this.player, this.food)){
             this.eatFood();
         }
-
-        if(this.tails.length >= 5){
-            this.exitLevel.y = 200;
-        }
-
-        if(this.collides2D(this.player, this.exitLevel)){
-            this.changePage("snakepagelvl2", "playable");
-        }
-
-        for(let i = 0; i < this.tails.length; i++){
-            if(i % 2 == 0){
-                this.tails[i].color = "red";
-            } else if( i % 3 == 0){
-                this.tails[i].color = "green";
-            } else {
-                this.tails[i].color = "blue";
-            }
-        }
     }
 
     spawnFood = () => {
         let foodX = Math.floor(Math.random() * 1380 + 50);
-        let foodY = Math.floor(Math.random() * 700 + 30);
-        this.food = this.addPageEntity( new Rectangle("food", foodX, foodY, "green", 25, 25));
+        let foodY = Math.floor(Math.random() * 670 + 30);
+        // this.food = this.addPageEntity( new Rectangle("food", foodX, foodY, "green", 25, 25));
+        this.food = this.addPageEntity( new Sprite("food", foodX, foodY, 25,25, "../assets/apple.png"));
+
     }
 
     eatFood = () => {
@@ -128,22 +122,7 @@ export class SnakePage extends Page {
             var tailY = this.player.y;
         }
 
-        let newTail = this.addPageEntity(new Rectangle(null, tailX, tailY, "red", this.player.width, this.player.height));
-        this.tails.push(newTail);
-        newTail = this.addPageEntity(new Rectangle(null, tailX, tailY, "red", this.player.width, this.player.height));
-        this.tails.push(newTail);
-        newTail = this.addPageEntity(new Rectangle(null, tailX, tailY, "red", this.player.width, this.player.height));
-        this.tails.push(newTail);
-        newTail = this.addPageEntity(new Rectangle(null, tailX, tailY, "red", this.player.width, this.player.height));
-        this.tails.push(newTail);
-        newTail = this.addPageEntity(new Rectangle(null, tailX, tailY, "red", this.player.width, this.player.height));
-        this.tails.push(newTail);
-        newTail = this.addPageEntity(new Rectangle(null, tailX, tailY, "red", this.player.width, this.player.height));
-        this.tails.push(newTail);
-        newTail = this.addPageEntity(new Rectangle(null, tailX, tailY, "red", this.player.width, this.player.height));
-        this.tails.push(newTail);
-
-        
+        let newTail = this.addPageEntity(new Rectangle(null, tailX, tailY, "green", this.player.width, this.player.height));
+        this.tails.push(newTail); 
     }
-
 }

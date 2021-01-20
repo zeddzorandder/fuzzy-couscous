@@ -7,9 +7,9 @@ export var loadChessboard = (entityContainer) => {
     for (var i = 1; i <= 8; i++) {
         for (var j = 1; j <= 8; j++) {
             if ((i + j) % 2 == 0) {
-                chessFields.push(entityContainer.addEntity(new Rectangle(null, j * boardSize, y, "yellow", boardSize, boardSize)));
+                chessFields.push(entityContainer.addEntity(new Rectangle(null, j * boardSize - 80, y, "blue", boardSize, boardSize)));
             } else {
-                chessFields.push(entityContainer.addEntity(new Rectangle(null, j * boardSize, y, "black", boardSize, boardSize)));
+                chessFields.push(entityContainer.addEntity(new Rectangle(null, j * boardSize - 80 , y, "green", boardSize, boardSize)));
             }
         }
         y += boardSize;

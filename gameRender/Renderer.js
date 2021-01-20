@@ -9,7 +9,6 @@ export class Renderer {
         }
     }
     updateGraphicsEntities = (entities) => this.entities = entities;
-    addGraphicsEntity = (entity) => this.entities.push(entity);
 }
 
 function refreshScreen() {
